@@ -138,12 +138,14 @@ void pubServo_callback()
 {
     ServoData servoInfo_msg{};
 
+    myMutex.lock();
     for (int i = 0 ; i < 7; i++){
         servoInfo_msg.temperature()[i] = servo[i].queryTemperature();
         servoInfo_msg.voltage()[i] = servo[i].queryVoltage();
         servoInfo_msg.current()[i] = servo[i].queryCurrent();
         servoInfo_msg.power()[i] = servo[i].queryPower();
     }
+    myMutex.unlock();
 
     pubServo_publisher->Write(servoInfo_msg, 0);
 }
