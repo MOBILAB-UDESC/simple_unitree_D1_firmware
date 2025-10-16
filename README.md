@@ -121,4 +121,4 @@ sudo systemctl enable d1_service.service
 ```
 
 ## Videos
-![D1-Mimic](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2k0NWhnNnlqbWhoemp1M3QxaXR5NHRsZ213Zmo3c2o5bW9lb2lvdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/niBrMiIwfDMe2jw5Vr/giphy.gif)
+<video src="https://github.com/MOBILAB-UDESC/simple_unitree_D1_firmware/raw/main/docs/resources/d1_mimic_first_test.mp4" autoplay></video>
