@@ -1,0 +1,7 @@
+struct ServoData
+{
+  double temperature[7];
+  double voltage[7];
+  double current[7];
+  double power[7];
+};

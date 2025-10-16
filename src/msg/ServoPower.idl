@@ -1,0 +1,4 @@
+struct ServoPower
+{
+  int64 power[7];
+};

@@ -1,0 +1,5 @@
+struct ServoAngleData
+{
+  double angles[7];
+  int64 delays_ms[7];
+};
