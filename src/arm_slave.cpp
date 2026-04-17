@@ -33,8 +33,8 @@ void subServoAngle_callback(const void* msg)
     const ServoAngleData* pm = (const ServoAngleData*) msg;
     float maxalpha = 286.4789 / 4;
     float maxomega = 28.64789 * 4;
-    float maxangle[7] = { 135,  90,  90,  135,  90,  135,  50};
-    float minangle[7] = {-135, -90, -90, -135, -90, -135, -20};
+    float maxangle[7] = { 135,  90,  90,  135,  90,  135,  60};
+    float minangle[7] = {-135, -90, -90, -135, -90, -135, -30};
 
     for(int i = 0; i < 7; i++)
     {
@@ -56,7 +56,6 @@ void subServoAngle_callback(const void* msg)
             testdelay_ms = testdelay_ms > 0 ? testdelay_ms : 0;
 
             servo[i].setRawAngle(angle, testdelay_ms);
-            std::cout << "id:" << i << ", curangle:" << curAngle << ", tarangle:" << angle << std::endl;
         }
         else
         {

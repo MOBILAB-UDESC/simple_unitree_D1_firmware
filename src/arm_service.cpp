@@ -78,10 +78,8 @@ void subServoAngle_callback(const void* msg)
     const ServoAngleData* pm = (const ServoAngleData*) msg;
     float maxalpha = 286.4789 / 4;
     float maxomega = 28.64789 * 4;
-    float maxangle[7] = { 135,  90,  90,  135,  90,  135,  50};
-    float minangle[7] = {-135, -90, -90, -135, -90, -135, -20};
-
-    std::cout << "Sending Servo Commands" << std::endl;
+    float maxangle[7] = { 135,  90,  90,  135,  90,  135,  60};
+    float minangle[7] = {-135, -90, -90, -135, -90, -135, -30};
 
     myMutex.lock();
     for(int i = 0; i < 7; i++)
@@ -103,8 +101,11 @@ void subServoAngle_callback(const void* msg)
             int testdelay_ms = (int)(((sqrt(omega * omega + abs(angle - curAngle) * 2 * alpha) - omega) / alpha) * 1800);
             testdelay_ms = testdelay_ms > 0 ? testdelay_ms : 0;
 
-            servo[i].setRawAngle(angle, testdelay_ms);
-            // std::cout << "id:" << i << ", curangle:" << curAngle << ", tarangle:" << angle << std::endl;
+            if (delay_ms == 1) {
+                servo[i].setRawAngle(angle, testdelay_ms);
+            } else {
+                servo[i].setRawAngle(angle, delay_ms);
+            }
         }
         else
         {
@@ -119,17 +120,12 @@ void pubServoAngle_callback()
 {
     ServoAngleData servoInfo_msg{};
 
-    // std::string msg = "Servo Info: ";
-
     for (int i = 0 ; i < 7; i++){
         myMutex.lock();
         servoInfo_msg.angles()[i] = servo[i].queryRawAngle();
         myMutex.unlock();
         servoInfo_msg.delays_ms()[i] = 10;
-        // msg += std::to_string(servoInfo_msg.angles()[i]) + ", ";
     }
-
-    // std::cout << msg << std::endl;
 
     pubServoAngle_publisher->Write(servoInfo_msg, 0);
 }
